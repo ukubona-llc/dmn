@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Through a glass, darkly: the pentad</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 24.23 27.33 2.69 11.67 29.31 11.67 7.77 27.33Z' fill='none' stroke='%232f3fa0' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#eceff4;--fg:#161a22;--mut:#566074;--ac:#2f3fa0;--ac2:#a8691d;--card:#f8f9fb;--ln:#c4cad6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1020;--fg:#e6e9f2;--mut:#9aa4bd;--ac:#9aabff;--ac2:#e0aa55;--card:#141a30;--ln:#2a3354}}
+:root[data-theme="dark"]{--bg:#0c1020;--fg:#e6e9f2;--mut:#9aa4bd;--ac:#9aabff;--ac2:#e0aa55;--card:#141a30;--ln:#2a3354}
+html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.65 Georgia,"Times New Roman",serif}
+.bar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:calc(8px + env(safe-area-inset-top,0px)) 8px 8px;pointer-events:none}
+.bar>*{pointer-events:auto}
+.r{display:flex;gap:6px}
+button{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--ln);border-radius:10px;width:42px;height:42px;display:grid;place-items:center;cursor:pointer;padding:0}
+button:focus-visible,a:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.logo{width:42px;height:42px;color:var(--ac);animation:spin 120s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.logo{animation:none}html{scroll-behavior:auto}}
+#panel{position:fixed;z-index:19;right:8px;top:calc(58px + env(safe-area-inset-top,0px));width:min(92vw,312px);background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:10px;display:none;grid-template-columns:repeat(3,1fr);gap:8px}
+#panel.on{display:grid}
+#panel a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px;border:1px solid var(--ln);border-radius:10px;text-decoration:none;color:var(--fg);font-size:13px;line-height:1.25;text-align:center}
+#panel a b{font-size:20px;color:var(--ac);font-weight:400}
+#panel a:hover{border-color:var(--ac)}
+main{max-width:720px;margin:0 auto;padding:84px 20px 80px}
+h1{font-size:clamp(34px,7vw,52px);line-height:1.08;margin:0 0 14px;font-weight:400;letter-spacing:-.01em}
+h2{font-size:26px;margin:0 0 8px;font-weight:400;color:var(--ac)}
+section{padding:36px 0;border-top:1px solid var(--ln)}
+p{margin:0 0 14px;max-width:62ch}
+.lede{color:var(--mut);font-size:20px}
+.sc{overflow-x:auto;border:1px solid var(--ln);border-radius:10px;margin:16px 0;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:560px;font:14px/1.45 system-ui,sans-serif}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--ln);vertical-align:top}
+th{color:var(--mut);font-weight:600}
+tr:last-child td{border-bottom:0}
+td:first-child{color:var(--ac2);font-weight:600;white-space:nowrap}
+svg text{font-family:system-ui,sans-serif;fill:var(--fg)}
+.fig{margin:16px 0;background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:10px;overflow-x:auto}
+.fig svg{display:block;margin:0 auto;max-width:100%;height:auto}
+.cap{font:13px/1.4 system-ui,sans-serif;color:var(--mut);margin:6px 0 0;text-align:center}
+.st{fill:none;stroke:var(--ac);stroke-width:2;stroke-linejoin:round}
+.nd{fill:var(--bg);stroke:var(--ac);stroke-width:2}
+.bx{fill:var(--bg);stroke:var(--ac);stroke-width:1.6}
+.ar{fill:none;stroke:var(--ac2);stroke-width:2}
+.mu{fill:var(--mut)!important}
+q{quotes:"\201C" "\201D"}
+</style>
+</head>
+<body>
+<div class="bar">
+  <svg class="logo" viewBox="0 0 32 32" role="img" aria-label="Pentad logo"><path d="M16 2 24.23 27.33 2.69 11.67 29.31 11.67 7.77 27.33Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+  <div class="r">
+    <button id="wf" aria-label="Open navigation" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><circle cx="3" cy="3" r="2"/><circle cx="10" cy="3" r="2"/><circle cx="17" cy="3" r="2"/><circle cx="3" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="17" cy="10" r="2"/><circle cx="3" cy="17" r="2"/><circle cx="10" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></button>
+    <button id="th" aria-label="Toggle light and dark theme"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="7"/><path d="M10 3a7 7 0 0 1 0 14z" fill="currentColor"/></svg></button>
+  </div>
+</div>
+<nav id="panel" aria-label="Sections">
+  <a href="#s1"><b>1</b>Question</a><a href="#s2"><b>2</b>Pentad</a><a href="#s3"><b>3</b>Star</a>
+  <a href="#s4"><b>4</b>Scripture</a><a href="#s5"><b>5</b>Lens</a><a href="#s6"><b>6</b>Glass</a>
+  <a href="#s7"><b>7</b>Ukubona</a><a href="#s8"><b>8</b>Gate</a><a href="#s9"><b>9</b>Open</a>
+</nav>
+
+<main>
+<h1>Through a glass, darkly</h1>
+<p class="lede">Five layers and a loop, read as a lens: from nihilism as a regulation failure to a platform that lets a person see themselves without being edited.</p>
+
+<section id="s1">
+<h2>The question</h2>
+<p>Nihilism, in this reading, is what language feels like when it runs without regulation. Layer II can generate endless sentences and endless prediction error, with nothing to say which errors matter. The prelingual engine was never nihilistic, because a harmonic series doesn't ask what it is for.</p>
+<p>The pentad is offered as a hermeneutic lens, a way of seeing that moves toward language and away from the prelingual, and it is accountable to readers, to surprise, and to its own failures.</p>
+</section>
+
+<section id="s2">
+<h2>The pentad</h2>
+<div class="sc"><table>
+<tr><th>Layer</th><th>Name</th><th>Mode</th><th>Instance</th><th>John 1</th><th>Ukubona</th></tr>
+<tr><td>I</td><td>Engine</td><td>Prelingual utterance {Music}</td><td>Harmonic series</td><td>With God</td><td>The principal</td></tr>
+<tr><td>II</td><td>Sample</td><td>Language, next-token, prediction error {Statistics}</td><td>12TET, circle of fifths</td><td>In the beginning was the Word</td><td>The reflective surface (DMN)</td></tr>
+<tr><td>III</td><td>Variation</td><td>Insertions, deletions, translocations, permutations {Adaptation}</td><td>Mutation, recombination</td><td>All things were made through him</td><td>API-gated agent sandbox</td></tr>
+<tr><td>IV</td><td>Regulation</td><td>Consonance and dissonance, tension, alteration {Regulation}</td><td>Rootless voicings, 1st inversion</td><td>The Word was God</td><td>Collisions among principal, platform, agents, adversaries</td></tr>
+<tr><td>V</td><td>Survivors</td><td>Graveyard, culture, memory, institutions {Embodiment}</td><td>The stank-face</td><td>The Word became flesh</td><td>What the principal ratifies</td></tr>
+<tr><td>I&prime;</td><td>Loop</td><td>Anthropocene engine {Technology}</td><td>Updated engine, then II&prime;</td><td>The darkness did not overcome it</td><td>The updated principal</td></tr>
+</table></div>
+</section>
+
+<section id="s3">
+<h2>The star</h2>
+<p>Adjacent layers follow one another in sequence. The diagonals link layers that skip one, and each diagonal is a distinct claim.</p>
+<div class="fig">
+<svg viewBox="-20 10 440 340" width="440" role="img" aria-label="Pentagram connecting layers I to V by diagonals, with a dashed loop from V back to I prime">
+<defs><marker id="ah" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 8 4 0 8z" fill="var(--ac2)"/></marker></defs>
+<path class="st" d="M200 60 276.4 295.2 76.4 149.8 323.6 149.8 123.6 295.2Z"/>
+<path class="ar" stroke-dasharray="5 4" d="M60 134C48 72 108 38 178 48" marker-end="url(#ah)"/>
+<text x="84" y="40" font-size="14" class="mu">I&prime;</text>
+<g class="nd"><circle cx="200" cy="60" r="18"/><circle cx="323.6" cy="149.8" r="18"/><circle cx="276.4" cy="295.2" r="18"/><circle cx="123.6" cy="295.2" r="18"/><circle cx="76.4" cy="149.8" r="18"/></g>
+<g font-size="14" text-anchor="middle"><text x="200" y="65">I</text><text x="323.6" y="155">II</text><text x="276.4" y="300">III</text><text x="123.6" y="300">IV</text><text x="76.4" y="155">V</text></g>
+<g font-size="13"><text x="224" y="56">Engine</text><text x="346" y="154">Sample</text><text x="276" y="332" text-anchor="middle">Variation</text><text x="124" y="332" text-anchor="middle">Regulation</text><text x="52" y="154" text-anchor="end">Survivors</text></g>
+</svg>
+<p class="cap">The loop from V back to I is what keeps the pentad from being a terminus.</p>
+</div>
+<div class="sc"><table>
+<tr><th>Diagonal</th><th>Claim</th></tr>
+<tr><td>I &ndash; III</td><td>The engine becomes variation under constraint.</td></tr>
+<tr><td>III &ndash; V</td><td>Variation is tested by what survives.</td></tr>
+<tr><td>V &ndash; II</td><td>Survivors become language, so culture is narrated memory.</td></tr>
+<tr><td>II &ndash; IV</td><td>The Word was God: language becomes normative.</td></tr>
+<tr><td>IV &ndash; I</td><td>Regulation returns to the engine, as in David's harp calming Saul.</td></tr>
+</table></div>
+</section>
+
+<section id="s4">
+<h2>Scripture, read through the pentad</h2>
+<p>The David reading was made after the text was read, so it is a retrodiction. Its value is that the order in the story matters.</p>
+<div class="sc"><table>
+<tr><th>Layer</th><th>Beat (2 Samuel 6, 1 Samuel 16)</th><th>Reading</th></tr>
+<tr><td>I &rarr; IV</td><td>David's harp relieves Saul's torment</td><td>Music regulating a mind in crisis</td></tr>
+<tr><td>IV</td><td>Uzzah touches the Ark and dies</td><td>Regulation without reverence, as lethal dissonance</td></tr>
+<tr><td>V</td><td>David waits three months, then dances with all his might</td><td>Embodiment inside a regulated space</td></tr>
+<tr><td>V &rarr; V</td><td>Michal despises him from the window</td><td>The institution policing embodiment</td></tr>
+<tr><td>III &rarr; V</td><td>Michal has no child to her death</td><td>The rejection does not propagate (a loose reading, since the text is ambiguous)</td></tr>
+</table></div>
+<p>Zarathustra dances against the spirit of gravity and must supply his own justification. David dances before an addressee. A dance with no addressee is harder to sustain.</p>
+</section>
+
+<section id="s5">
+<h2>The lens, and its honesty</h2>
+<p>Astrology fits everything too. What separates a lens from a pseudo-theory is whether misses cost anything.</p>
+<div class="sc"><table>
+<tr><th>Test</th><th>Astrology</th><th>Pentad as hermeneutic lens</th><th>Pentad as theory (not yet earned)</th></tr>
+<tr><td>Misses</td><td>Absorbed by ad hoc causes</td><td>Named as unreadable cases</td><td>Must be able to lose</td></tr>
+<tr><td>Assignments</td><td>Made after the fact</td><td>Made after, and said so</td><td>Committed before the answer</td></tr>
+<tr><td>Who scores</td><td>The reader supplies the fit</td><td>Other readers, by disagreement</td><td>A hostile specialist</td></tr>
+<tr><td>Authority</td><td>Predictive</td><td>A way of seeing</td><td>Predictive</td></tr>
+</table></div>
+<p>The discipline is staying in one mode at a time: hermeneutic claims backed by hermeneutic evidence, with no borrowed prestige from theory.</p>
+</section>
+
+<section id="s6">
+<h2>A sample is a glass, darkly</h2>
+<p>Paul's word for the glass is a polished-metal mirror, and <q>darkly</q> is <i>ainigma</i>, a riddle. 12TET is a sample of the harmonic series that is distorted on purpose: the circle closes because every fifth is slightly flat. The distortion is known to the cent.</p>
+<div class="fig">
+<svg viewBox="0 0 520 210" width="520" role="img" aria-label="Bar chart of equal-temperament error against just intonation in cents">
+<text x="8" y="18" font-size="13" class="mu">12TET minus just intonation, in cents</text>
+<line x1="260" y1="30" x2="260" y2="196" stroke="var(--ln)" stroke-width="2"/>
+<g font-size="13">
+<text x="8" y="58">Fifth</text><rect x="244.3" y="44" width="15.7" height="22" fill="var(--ac)"/><text x="240" y="60" text-anchor="end">&minus;1.96</text>
+<text x="8" y="98">Fourth</text><rect x="260" y="84" width="15.7" height="22" fill="var(--ac)"/><text x="281" y="100">+1.96</text>
+<text x="8" y="138">Major third</text><rect x="260" y="124" width="109.5" height="22" fill="var(--ac2)"/><text x="375" y="140">+13.69</text>
+<text x="8" y="178">Minor third</text><rect x="134.9" y="164" width="125.1" height="22" fill="var(--ac2)"/><text x="130" y="180" text-anchor="end">&minus;15.64</text>
+</g></svg>
+<p class="cap">Twelve pure fifths overshoot seven octaves by 23.46 cents, the Pythagorean comma, so the error is spread across the scale.</p>
+</div>
+<p>The distortion in a temperament is designed and bounded. Most statistical and AI distortion is neither, and whoever picks the sampling frame picks the reflection. Agents never see the principal. They see a sample of the engine, filtered by what was uttered, when, and in what words. Claims data and EMRs are thin slices of a life, and decisions made on them land on the whole person.</p>
+</section>
+
+<section id="s7">
+<h2>Ukubona: to see self</h2>
+<p>Ukubona is the II layer, a surface where prelingual utterance becomes record. A journaling and event-streaming platform can amplify rumination at scale, so regulation has to be designed in.</p>
+<div class="fig">
+<svg viewBox="0 0 760 210" width="760" role="img" aria-label="Flow from principal through Ukubona, sandbox, collisions, survivors, and back to principal">
+<defs><marker id="ah2" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 8 4 0 8z" fill="var(--ac2)"/></marker></defs>
+<g class="bx"><rect x="10" y="40" width="128" height="86" rx="8"/><rect x="162" y="40" width="128" height="86" rx="8"/><rect x="314" y="40" width="128" height="86" rx="8"/><rect x="466" y="40" width="128" height="86" rx="8"/><rect x="618" y="40" width="128" height="86" rx="8"/></g>
+<g font-size="12" text-anchor="middle">
+<text x="74" y="62" font-size="14" fill="var(--ac)">I Principal</text><text x="74" y="84">prelingual</text><text x="74" y="100">utterance</text>
+<text x="226" y="62" font-size="14" fill="var(--ac)">II Ukubona</text><text x="226" y="84">the DMN, a mirror</text><text x="226" y="100">that shows its limits</text>
+<text x="378" y="62" font-size="14" fill="var(--ac)">III Sandbox</text><text x="378" y="84">API-gated agents</text><text x="378" y="100">vary and propose</text>
+<text x="530" y="62" font-size="14" fill="var(--ac)">IV Collisions</text><text x="530" y="84">insurers, clinicians,</text><text x="530" y="100">other agents</text>
+<text x="682" y="62" font-size="14" fill="var(--ac)">V Survivors</text><text x="682" y="84">agents rank,</text><text x="682" y="100">principal ratifies</text>
+</g>
+<g class="ar" marker-end="url(#ah2)"><path d="M138 83H160" marker-end="url(#ah2)"/><path d="M290 83H312" marker-end="url(#ah2)"/><path d="M442 83H464" marker-end="url(#ah2)"/><path d="M594 83H616" marker-end="url(#ah2)"/><path d="M682 126V170H74V130" marker-end="url(#ah2)"/></g>
+<text x="378" y="190" font-size="12" text-anchor="middle" class="mu">I&prime;: the principal's record updates the engine</text>
+</svg>
+</div>
+<p>Agent rankings and timelines are selection before the fact, which belongs to IV. Survivors at V are selection after the fact, so the record of what the principal took, ignored, or abandoned must be what feeds I&prime;. If agent output counts as survival, the loop closes on itself and the platform authors the person. SAPATA, scale-aware perception-agency temporal awareness, is the candidate fix: it can show which past recommendations were taken and at what scale they held.</p>
+</section>
+
+<section id="s8">
+<h2>The gate</h2>
+<p>Making patients sovereign makes insurers and care systems adversaries, and they are not the same adversary. Insurers oppose on cost. Clinicians often share the patient's goals and contest the platform's authority over the record.</p>
+<div class="sc"><table>
+<tr><th>Layer</th><th>Requirement</th></tr>
+<tr><td>V &rarr; I&prime;</td><td>The principal ratifies what survives; agents only rank.</td></tr>
+<tr><td>II</td><td>Every inference carries its sampling frame, including how many entries and at what scale.</td></tr>
+<tr><td>II</td><td>The mirror shows its uncertainty, so reflection and editing can be told apart.</td></tr>
+<tr><td>IV</td><td>An append-only, principal-held log serves as both sovereignty and evidence.</td></tr>
+<tr><td>IV</td><td>Separate gates for insurers, clinicians, and outside agents.</td></tr>
+<tr><td>IV</td><td>Access cannot be made a condition of service, or the record stops being sovereign.</td></tr>
+</table></div>
+</section>
+
+<section id="s9">
+<h2>Still open</h2>
+<p>When an adversary can make access a condition of coverage, what does the gate do? Can SAPATA encode the sampling frame, or does it need its own layer? And what happens when the pentad is committed to slot assignments on a text it has never read, before the answer is checked?</p>
+<p>Paul's line runs both ways: <q>then shall I know even as also I am known.</q> The sovereignty question is who gets to see whom, and on what terms.</p>
+</section>
+</main>
+
+<script>
+(function(){
+var d=document.documentElement,p=document.getElementById('panel'),w=document.getElementById('wf'),t=document.getElementById('th');
+try{var s=localStorage.getItem('theme');if(s)d.setAttribute('data-theme',s)}catch(e){}
+t.onclick=function(){
+  var dark=d.getAttribute('data-theme')?d.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  var n=dark?'light':'dark';d.setAttribute('data-theme',n);
+  try{localStorage.setItem('theme',n)}catch(e){}
+};
+function tog(o){p.classList.toggle('on',o);w.setAttribute('aria-expanded',o)}
+w.onclick=function(e){e.stopPropagation();tog(!p.classList.contains('on'))};
+p.onclick=function(e){if(e.target.closest('a'))tog(false)};
+document.addEventListener('click',function(e){if(!p.contains(e.target))tog(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')tog(false)});
+})();
+</script>
+</body>
+</html>
