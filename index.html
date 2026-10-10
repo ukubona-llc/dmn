@@ -47,6 +47,9 @@ svg text{font-family:system-ui,sans-serif;fill:var(--fg)}
 .bx{fill:var(--bg);stroke:var(--ac);stroke-width:1.6}
 .ar{fill:none;stroke:var(--ac2);stroke-width:2}
 .mu{fill:var(--mut)!important}
+h3{font-size:19px;margin:26px 0 6px;font-weight:400;color:var(--ac2)}
+pre{margin:0;padding:12px 14px;font:12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre;overflow-x:auto;color:var(--fg);tab-size:2}
+.cl{font:13px/1.4 system-ui,sans-serif;color:var(--mut);margin:16px 0 -6px}
 q{quotes:"\201C" "\201D"}
 </style>
 </head>
@@ -61,7 +64,7 @@ q{quotes:"\201C" "\201D"}
 <nav id="panel" aria-label="Sections">
   <a href="#s1"><b>1</b>Question</a><a href="#s2"><b>2</b>Pentad</a><a href="#s3"><b>3</b>Star</a>
   <a href="#s4"><b>4</b>Scripture</a><a href="#s5"><b>5</b>Lens</a><a href="#s6"><b>6</b>Glass</a>
-  <a href="#s7"><b>7</b>Ukubona</a><a href="#s8"><b>8</b>Gate</a><a href="#s9"><b>9</b>Open</a>
+  <a href="#s7"><b>7</b>Ukubona</a><a href="#s8"><b>8</b>Gate</a><a href="#s9"><b>9</b>Case</a><a href="#s10"><b>10</b>Open</a>
 </nav>
 
 <main>
@@ -204,8 +207,69 @@ q{quotes:"\201C" "\201D"}
 </section>
 
 <section id="s9">
+<h2>Case study: a record that took two years</h2>
+<p>This reads one live, unadjudicated matter through the pentad: the 2024 Cornell fraternity allegation, from a night in October 2024 to a civil suit and a special prosecutor in 2026. Everything below is allegation, reported procedure, or the analyst's annotation, built from public reporting as of 10 October 2026. It uses the pentad as a lens and makes no finding about anyone's guilt. Private individuals are not named.</p>
+<div class="sc"><table>
+<tr><th>Layer</th><th>Reading in this case</th></tr>
+<tr><td>I</td><td>The principal. The constitutive body is fixed on any policy timescale. The sampler is not: alcohol and drugs acted on the engine before encoding, and per the lawsuit there is an interval after loss of consciousness where first-person memory is least available.</td></tr>
+<tr><td>II</td><td>The record that carries the night: group-chat messages, texts, a police statement, a Title IX file, a pleading. Each has a different frame, time, and author. The first police report recorded 8&ndash;10 men; the lawsuit names seven.</td></tr>
+<tr><td>III</td><td>Who may insert, tombstone, or reorder. Reported: an anonymous forum post that supplied a label, members' texts described as damage control, a prosecutor's summary of a statement. Each transformation is recorded apart from its interpretation.</td></tr>
+<tr><td>IV</td><td>University process, prosecutor, civil court, governor, and informal peer judgment, each with its own threshold. One agent read the 2024 statement as voluntary participation; another reads it as a detailed allegation.</td></tr>
+<tr><td>V</td><td>Agent-ranked output dominates: media framing, institutional statements, an attorney's account of her state, a prosecutor's account of her statement. What is thin is her own account in her own words, with its sampling frame attached.</td></tr>
+<tr><td>I&prime;</td><td>Not the biology. Her self-model, inputs, and priors changed, and that change is what the next section follows.</td></tr>
+</table></div>
+
+<h3>The self-model and the latency</h3>
+<p>Recall is reconstruction. Each retrieval of the night is a new sample taken through what the person currently believes happened to them and who they take themselves to be. The self-model is therefore the read head on layer II, not background. Where encoding was partial, it also supplies the connective material for gaps. That makes the interval between the event and each account a measurement in its own right.</p>
+<div class="sc"><table style="min-width:0">
+<tr><th>Interval</th><th>From the event to</th></tr>
+<tr><td>Days</td><td>First texts, including an apology from one accused man</td></tr>
+<tr><td>About 3 weeks</td><td>The police report (date from the supplied summary)</td></tr>
+<tr><td>Months</td><td>The Title IX investigation (2025; month not in the sources)</td></tr>
+<tr><td>About 23 months</td><td>The civil suit (September 2026)</td></tr>
+</table></div>
+<p>At least four readings of her state are on record: the texts, the police report, the Title IX file, and the pleading. They need not contradict each other, but they come from different authors at different distances from the event. Two are attributions by agents: the prosecutor's <q>voluntary</q> and her attorney's <q>in denial</q>. The gate requirement applies directly. A self-model entry must be authored by the principal and carry its frame, and an agent's reading must be stored as an attribution, never as the principal's state. A log that lets the second stand in for the first authors the person, which is the V &rarr; I&prime; warning above.</p>
+
+<h3>Schemas</h3>
+<p>The ledger is NDJSON, one record per line. The first block is the base schema, written one field per line so it stays readable. The second is a proposed extension for self-model records, which is a design for the platform, not something the case reporting contains.</p>
+<p class="cl">ledger.schema.ndjson</p>
+<div class="sc"><pre>{"type":"field","name":"id","note":"record id"}
+{"type":"field","name":"layer","note":"I | II | III | IV | V"}
+{"type":"field","name":"ts","note":"timestamp or best available"}
+{"type":"field","name":"ts_precision","note":"exact | day | approx | inferred"}
+{"type":"field","name":"kind","note":"event_claim | utterance | transformation | institutional_act"}
+{"type":"field","name":"speaker","note":"who produced it"}
+{"type":"field","name":"channel","note":"medium"}
+{"type":"field","name":"summary","note":"paraphrase, not verbatim"}
+{"type":"field","name":"frame","note":"sampling frame: when, in what state, asked by whom"}
+{"type":"field","name":"transform","note":"none | summarized | reported_secondhand | unknown"}
+{"type":"field","name":"status","note":"alleged | reported | stated_by_party | institutional | adjudicated"}
+{"type":"field","name":"src","note":"source keys"}
+{"type":"field","name":"annotation","note":"analyst note; carries no evidentiary weight"}
+{"type":"rule","note":"Allegation, denial, inference and finding are never upgraded into one another."}
+{"type":"rule","note":"Undated or truncated items go to open_items, not guesses."}</pre></div>
+<p class="cl">self_model.extension.ndjson (proposal)</p>
+<div class="sc"><pre>{"type":"field","name":"kind","note":"self_model | agent_attribution"}
+{"type":"field","name":"author","note":"self_model: the principal only. agent_attribution: the agent named"}
+{"type":"field","name":"about","note":"the state or statement being described"}
+{"type":"field","name":"label","note":"the account of the event in the author's words, paraphrased"}
+{"type":"field","name":"latency_days","note":"days from the event to this utterance"}
+{"type":"field","name":"cue_ids","note":"ids of records the author could see at the time: texts, posts, files"}
+{"type":"field","name":"cue_dependent","note":"true | false | unknown: detail first appearing after a cue"}
+{"type":"field","name":"ratified","note":"true only if the principal later confirmed it, with ts"}
+{"type":"rule","note":"An agent_attribution never becomes a self_model record."}
+{"type":"rule","note":"Revisions append. Earlier self_model records are never overwritten."}</pre></div>
+<p class="cl">two records from the case, in the extended form</p>
+<div class="sc"><pre>{"id":"U09","layer":"II","kind":"self_model","author":"Doe","channel":"text to accused man","label":"about 90 percent of the night was not consensual","latency_days":"approx 14-18","cue_ids":["U08"],"cue_dependent":"unknown","ratified":"unknown"}
+{"id":"U18","layer":"II","kind":"agent_attribution","author":"her attorney","about":"Doe's state after the event","label":"in denial and traumatized","latency_days":"approx 710"}</pre></div>
+
+<h3>What would count as a miss</h3>
+<p>Two commitments, stated before the records are public. First, the disagreement over the 2024 statement should trace to a transformation in what the prosecutor reviewed, such as a summary or a selection. If the full transcript is shown to match his description, that reading fails. Second, details that first appear after a cue, like the forum post or the Title IX file, should vary more across later tellings than details recorded in the first weeks. If they do not, the self-model account of recall adds nothing here. Neither prediction decides anyone's guilt, and both can be scored by readers who can see the records.</p>
+</section>
+
+<section id="s10">
 <h2>Still open</h2>
-<p>When an adversary can make access a condition of coverage, what does the gate do? Can SAPATA encode the sampling frame, or does it need its own layer? And what happens when the pentad is committed to slot assignments on a text it has never read, before the answer is checked?</p>
+<p>When an adversary can make access a condition of coverage, what does the gate do? Can SAPATA encode the sampling frame, or does it need its own layer? And what happens when the pentad is committed to slot assignments on a text it has never read, before the answer is checked? And when a principal's self-model changes over two years, how does the log keep both states without the later one erasing the earlier?</p>
 <p>Paul's line runs both ways: <q>then shall I know even as also I am known.</q> The sovereignty question is who gets to see whom, and on what terms.</p>
 </section>
 </main>
